@@ -2,10 +2,10 @@
 Usage:
   # From tensorflow/models/
   # Create train data:
-  python generate_tfrecord.py --csv_input=images/train_labels.csv --image_dir=images/train --output_path=train.record
+  python generate_tfrecord.py --csv_input=data/train_labels.csv  --output_path=train.record
 
   # Create test data:
-  python generate_tfrecord.py --csv_input=images/test_labels.csv  --image_dir=images/test --output_path=test.record
+  python generate_tfrecord.py --csv_input=data/test_labels.csv  --output_path=test.record
 """
 from __future__ import division
 from __future__ import print_function
@@ -22,19 +22,21 @@ from collections import namedtuple, OrderedDict
 
 flags = tf.app.flags
 flags.DEFINE_string('csv_input', '', 'Path to the CSV input')
-flags.DEFINE_string('image_dir', '', 'Path to the image directory')
 flags.DEFINE_string('output_path', '', 'Path to output TFRecord')
+flags.DEFINE_string('image_dir', '', 'Path to images')
 FLAGS = flags.FLAGS
 
 
 # TO-DO replace this with label map
 def class_text_to_int(row_label):
-    if row_label == 'stand1':
+    if row_label == 'totoro':
+    # if row_label == 'tommad':
         return 1
-    if row_label == 'smart_stand':
+    elif row_label == 'nekobus':
+    # elif row_label == 'kk':
         return 2
     else:
-        return 0
+        None
 
 
 def split(df, group):
@@ -56,7 +58,7 @@ def create_tf_example(group, path):
     xmaxs = []
     ymins = []
     ymaxs = []
-    classes_text = []
+    classes_text = [] 
     classes = []
 
     for index, row in group.object.iterrows():
@@ -86,7 +88,7 @@ def create_tf_example(group, path):
 
 def main(_):
     writer = tf.python_io.TFRecordWriter(FLAGS.output_path)
-    path = os.path.join(os.getcwd(), FLAGS.image_dir)
+    path = os.path.join(FLAGS.image_dir)
     examples = pd.read_csv(FLAGS.csv_input)
     grouped = split(examples, 'filename')
     for group in grouped:
