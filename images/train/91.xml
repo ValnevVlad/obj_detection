@@ -1,0 +1,26 @@
+<annotation>
+	<folder>images</folder>
+	<filename>91.jpg</filename>
+	<path>/home/vladislav/Downloads/images/91.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>2400</width>
+		<height>1080</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>smart_stand</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1</xmin>
+			<ymin>109</ymin>
+			<xmax>2400</xmax>
+			<ymax>1075</ymax>
+		</bndbox>
+	</object>
+</annotation>
